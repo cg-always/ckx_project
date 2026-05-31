@@ -2,6 +2,7 @@
   <section>
     <!-- Hero -->
     <div class="hero">
+      <span class="hero-decoration">🏮</span>
       <h1>英国春节文化活动合规指南</h1>
       <p>本指南由北京外国语大学《英国春节活动法律风险规避手册》研究团队编制，面向在英华人社团及文化活动组织者，提供法律术语查询、合规流程指引、风险评估工具和实务案例参考。</p>
       <div class="hero-buttons">

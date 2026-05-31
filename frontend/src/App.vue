@@ -73,24 +73,50 @@
     </nav>
 
     <main>
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="fade-slide" mode="out-in">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </main>
 
     <footer class="footer">
       <p>北京外国语大学本科生创新创业训练计划项目成果转化展示</p>
       <p class="muted">《英国春节活动法律风险规避手册》配套数字资源 | 内容仅供参考，具体合规要求请咨询当地Council或专业法务顾问</p>
     </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" :class="{ visible: showBackToTop }" @click="scrollToTop" title="回到顶部">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { useDarkMode } from './composables/useDarkMode.js'
 import { useAuthStore } from './stores/auth.js'
 
 const { isDark, toggle: toggleDark } = useDarkMode()
 const auth = useAuthStore()
 const mobileOpen = ref(false)
+const showBackToTop = ref(false)
+
+function onScroll() {
+  showBackToTop.value = window.scrollY > 400
+}
+
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', onScroll, { passive: true })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', onScroll)
+})
 </script>
 
 <style scoped>

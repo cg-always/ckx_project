@@ -84,7 +84,10 @@
           <span class="phase-count">{{ phaseDone(phase.key) }}/{{ phaseTotal(phase.key) }}</span>
         </div>
         <label v-for="task in phaseTasks(phase.key)" :key="task.id" class="task-item" @click="task.done = !task.done">
-          <input type="checkbox" :checked="task.done" @click.stop="task.done = !task.done" />
+          <input type="checkbox" class="hidden-checkbox" :checked="task.done" @click.stop="task.done = !task.done" tabindex="-1" />
+          <span class="custom-checkbox" :class="{ checked: task.done, done: task.done }">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+          </span>
           <span class="task-text" :class="{ 'task-done': task.done }">{{ task.text }}</span>
         </label>
       </div>
